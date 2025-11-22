@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>Pow Pow Task｜跑跑腿萬事屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pow Pow Task 跑跑腿萬事屋：代買、代送、代取、代排、代辦任務，台北地區快速跑腿服務。">
+  <style>
+    :root {
+      --pow-orange: #f97316;
+      --pow-orange-dark: #ea580c;
+      --pow-cream: #fff7e6;
+      --pow-bg: #faf5ef;
+      --pow-text: #1f2933;
+      --pow-muted: #6b7280;
+      --pow-border: #e5e7eb;
+      --radius-lg: 18px;
+      --radius-sm: 10px;
+      --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Noto Sans TC", sans-serif;
+      background: radial-gradient(circle at top, #fff, var(--pow-bg));
+      color: var(--pow-text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 24px 20px 64px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      gap: 16px;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      background: var(--pow-cream);
+      border: 2px solid var(--pow-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 12px;
+      color: var(--pow-orange-dark);
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .brand-text-main {
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    .brand-text-sub {
+      font-size: 13px;
+      color: var(--pow-muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .nav-link {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--pow-muted);
+    }
+
+    .nav-link:hover {
+      background: rgba(249, 115, 22, 0.08);
+      color: var(--pow-orange-dark);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(249, 115, 22, 0.08);
+      color: var(--pow-orange-dark);
+      margin-bottom: 14px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--pow-orange);
+    }
+
+    /* HERO */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 28px;
+      margin-bottom: 40px;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: clamp(26px, 5vw, 34px);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .hero-title span {
+      color: var(--pow-orange-dark);
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--pow-muted);
+      margin-bottom: 18px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      font-size: 12px;
+    }
+
+    .hero-tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid var(--pow-border);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: none;
+      padding: 9px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      transition: transform 0.08s ease, box-shadow 0.08s ease,
+        background 0.08s ease, color 0.08s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pow-orange), var(--pow-orange-dark));
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(234, 88, 12, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(234, 88, 12, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--pow-orange);
+      color: var(--pow-orange-dark);
+    }
+
+    .btn-outline:hover {
+      background: rgba(249, 115, 22, 0.06);
+    }
+
+    .hero-note {
+      font-size: 11px;
+      color: var(--pow-muted);
+    }
+
+    .hero-card {
+      border-radius: var(--radius-lg);
+      background: var(--pow-cream);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 16px;
+      border: 1px solid rgba(249, 115, 22, 0.16);
+    }
+
+    .hero-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .hero-list {
+      list-style: none;
+      font-size: 13px;
+      color: var(--pow-muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-list li {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .hero-list-bullet {
+      font-size: 10px;
+      color: var(--pow-orange-dark);
+      margin-top: 4px;
+    }
+
+    .hero-highlight {
+      font-size: 12px;
+      background: #fff;
+      border-radius: 999px;
+      padding: 6px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px dashed rgba(249, 115, 22, 0.5);
+    }
+
+    /* Sections */
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--pow-muted);
+      margin-bottom: 18px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 14px 14px 12px;
+      border: 1px solid var(--pow-border);
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.03);
+      font-size: 13px;
+    }
+
+    .card h3 {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+      font-size: 11px;
+    }
+
+    .chip {
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: var(--pow-bg);
+      color: var(--pow-muted);
+    }
+
+    /* Pricing */
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      background: #fff;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.03);
+    }
+
+    .pricing-table th,
+    .pricing-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--pow-border);
+    }
+
+    .pricing-table th {
+      background: var(--pow-cream);
+      text-align: left;
+      font-size: 12px;
+    }
+
+    .pricing-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .pricing-tagline {
+      font-size: 12px;
+      color: var(--pow-muted);
+      margin-top: 8px;
+    }
+
+    /* Steps */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .step {
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      background: #fff;
+      border: 1px dashed var(--pow-border);
+      text-align: center;
+    }
+
+    .step-number {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 4px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      background: var(--pow-orange-dark);
+    }
+
+    /* Form */
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 20px;
+    }
+
+    form {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 18px 16px 16px;
+      border: 1px solid var(--pow-border);
+      box-shadow: var(--shadow-soft);
+      font-size: 13px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    input,
+    select,
+    textarea {
+      border-radius: 10px;
+      border: 1px solid var(--pow-border);
+      padding: 7px 9px;
+      font-size: 13px;
+      font-family: inherit;
+      background: #fdfdfd;
+      transition: border 0.08s ease, box-shadow 0.08s ease,
+        background 0.08s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--pow-orange-dark);
+      box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.25);
+      background: #fff;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .required {
+      color: #ef4444;
+      margin-left: 2px;
+    }
+
+    .form-note {
+      font-size: 11px;
+      color: var(--pow-muted);
+      margin-top: 6px;
+    }
+
+    .contact-side {
+      font-size: 13px;
+      color: var(--pow-muted);
+    }
+
+    .contact-side h3 {
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: var(--pow-text);
+    }
+
+    .contact-list {
+      list-style: none;
+      margin-top: 4px;
+    }
+
+    .contact-list li {
+      margin-bottom: 6px;
+    }
+
+    footer {
+      margin-top: 32px;
+      font-size: 11px;
+      color: var(--pow-muted);
+      text-align: center;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 840px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .steps {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .contact-wrap {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 18px 16px 40px;
+      }
+
+      .grid-3,
+      .grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .form-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="logo-wrap">
+        <div class="logo-circle">
+          POW<br>POW
+        </div>
+        <div>
+          <div class="brand-text-main">POW POW TASK</div>
+          <div class="brand-text-sub">跑跑腿萬事屋｜We run so you don’t have to.</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#services" class="nav-link">服務項目</a>
+        <a href="#pricing" class="nav-link">價目表</a>
+        <a href="#flow" class="nav-link">流程說明</a>
+        <a href="#contact" class="nav-link">提交任務</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div>
+          <div class="badge">
+            <span class="badge-dot"></span>
+            台北地區｜跑腿・代買・代送・代辦
+          </div>
+          <h1 class="hero-title">
+            <span>忙不過來的事</span>，<br>交給 Pow Pow Task 跑就好。
+          </h1>
+          <p class="hero-subtitle">
+            日常小事、麻煩雜事、突發急件到特殊任務，通通可以聊聊。
+            一則訊息，我替你出去跑一趟。
+          </p>
+          <div class="hero-tags">
+            <span class="hero-tag">🛒 代買 / 購物</span>
+            <span class="hero-tag">📦 代送・代取</span>
+            <span class="hero-tag">⏱ 急件跑腿</span>
+            <span class="hero-tag">🎫 代排隊・代購</span>
+            <span class="hero-tag">📄 行政代辦</span>
+          </div>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">
+              立即提交任務
+            </a>
+            <a href="#contact" class="btn btn-outline">
+              加入 LINE 洽詢
+            </a>
+          </div>
+          <div class="hero-note">
+            💬 目前採＜先填表單／私訊 → 報價 → 確認後開始任務＞。
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <div class="hero-card-title">今天可以替你跑什麼？</div>
+          <ul class="hero-list">
+            <li><span class="hero-list-bullet">•</span><span>幫你買早餐、咖啡、生活用品、藥局小物。</span></li>
+            <li><span class="hero-list-bullet">•</span><span>把家裡的東西送到公司／學校，或幫你去取回遺忘物。</span></li>
+            <li><span class="hero-list-bullet">•</span><span>幫忙排隊、取號碼牌、代購限量商品／週邊。</span></li>
+            <li><span class="hero-list-bullet">•</span><span>簡單行政代辦：排隊等候、收件、遞送文件。</span></li>
+          </ul>
+          <div class="hero-highlight">
+            ⚡ 急件可以先註明「急」，我會優先回覆與排程。
+          </div>
+        </aside>
+      </section>
+
+      <!-- SERVICES -->
+      <section id="services">
+        <h2 class="section-title">服務項目 Services</h2>
+        <p class="section-subtitle">
+          只要是在合理、安全範圍內的跑腿任務，都可以先問看看。
+        </p>
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>日常代買</h3>
+            <p>早餐、飲料、超商、全聯、小北百貨、藥局小物、寵物用品…沒空出門就交給我。</p>
+            <div class="chip-row">
+              <span class="chip">🛒 生活採買</span>
+              <span class="chip">☕ 飲料早餐</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>代送・代取</h3>
+            <p>文件、鑰匙、紙箱、小包裹，從 A 點送到 B 點，或幫你到指定地點取件。</p>
+            <div class="chip-row">
+              <span class="chip">📦 小件配送</span>
+              <span class="chip">🏫 家→公司 / 學校</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>排隊・代購</h3>
+            <p>演唱會週邊、限定商品、熱門餐廳、門市取號碼牌等排隊任務。</p>
+            <div class="chip-row">
+              <span class="chip">🎫 週邊 / 限定</span>
+              <span class="chip">⏱ 代排隊</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>行政代辦（簡易）</h3>
+            <p>戶政、郵局、店家排隊等候、收件與遞送等「需要有人在現場」的任務。</p>
+            <div class="chip-row">
+              <span class="chip">📄 文件收送</span>
+              <span class="chip">🏢 簡易排隊</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>急件跑腿</h3>
+            <p>有時間壓力的任務，可註明「急件」。我會先確認時程，再與你溝通是否可行。</p>
+            <div class="chip-row">
+              <span class="chip">⚡ 急件加價</span>
+              <span class="chip">⏰ 時間先講好</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>特殊任務</h3>
+            <p>需要現場拍照、錄影、協助收貨、看家等，可先描述需求，一起評估可行性。</p>
+            <div class="chip-row">
+              <span class="chip">📸 現場紀錄</span>
+              <span class="chip">🧩 客製任務</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRICING -->
+      <section id="pricing">
+        <h2 class="section-title">基礎價目 Basic Pricing</h2>
+        <p class="section-subtitle">
+          依實際路程與任務內容報價，下方為一般情況參考。特殊／複雜任務會另外討論。
+        </p>
+        <table class="pricing-table">
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>費用（TWD）</th>
+              <th>說明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>基本跑腿（約 2 公里內）</td>
+              <td>$150</td>
+              <td>同一行政區內簡單路程，含單趟基礎服務費。</td>
+            </tr>
+            <tr>
+              <td>距離加價</td>
+              <td>每公里 +$20</td>
+              <td>超過基礎距離部分，依實際路線估算。</td>
+            </tr>
+            <tr>
+              <td>等待・排隊時間</td>
+              <td>每 10 分鐘 +$30</td>
+              <td>例如排隊、等候開門、等候叫號等。</td>
+            </tr>
+            <tr>
+              <td>急件加價</td>
+              <td>+$150 起</td>
+              <td>1 小時內需完成或需插單處理之任務。</td>
+            </tr>
+            <tr>
+              <td>代墊金額</td>
+              <td>0–1000 元</td>
+              <td>可先代墊，完成後一次結算；超過金額會請先匯款或轉帳。</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="pricing-tagline">
+          ✅ 每個任務都會先「估價 → 你確認」才會開始，不會有突然加價的狀況。
+        </p>
+      </section>
+
+      <!-- FLOW -->
+      <section id="flow">
+        <h2 class="section-title">流程說明 How It Works</h2>
+        <p class="section-subtitle">
+          你只需要花 1～2 分鐘填寫需求，其餘的我來跑。
+        </p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            填寫任務內容或私訊描述需求
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            依距離與內容估價，回覆可行時段
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            你確認 OK 後，排程開始任務
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            任務途中視需要回報、完成後提供照片
+          </div>
+          <div class="step">
+            <div class="step-number">5</div>
+            任務結束，整理金額並收款完成
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT & FORM -->
+      <section id="contact">
+        <h2 class="section-title">提交跑腿任務 Submit a Task</h2>
+        <p class="section-subtitle">
+          先把你的需求大概寫給我看，我會依實際路線與內容回覆「是否可接、預估金額與時間」。
+        </p>
+
+        <div class="contact-wrap">
+          <form
+            method="post"
+            action="#"
+          >
+            <!-- 若未來要接 Formspree 或後端，在這裡把 action 改成你的表單處理網址即可。 -->
+            <div class="form-row">
+              <div class="field">
+                <label for="task-type">任務類型<span class="required">*</span></label>
+                <select id="task-type" name="任務類型" required>
+                  <option value="">請選擇…</option>
+                  <option>日常代買</option>
+                  <option>代送</option>
+                  <option>代取</option>
+                  <option>排隊・代購</option>
+                  <option>行政代辦</option>
+                  <option>急件跑腿</option>
+                  <option>其他 / 特殊任務</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="urgent">是否為急件？<span class="required">*</span></label>
+                <select id="urgent" name="是否急件" required>
+                  <option value="">請選擇…</option>
+                  <option>一般任務（彈性時間）</option>
+                  <option>希望今天完成</option>
+                  <option>1 小時內，需要評估可行性</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="task-detail">請描述你希望我幫忙做什麼<span class="required">*</span></label>
+              <textarea
+                id="task-detail"
+                name="任務說明"
+                placeholder="越具體越好：要去哪裡、買／送／取什麼、大約幾件、是否易碎等。"
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="from">起點地點（From）<span class="required">*</span></label>
+                <input
+                  id="from"
+                  name="起點"
+                  type="text"
+                  placeholder="例：台北市 ○○ 區 △△ 路…"
+                  required
+                >
+              </div>
+              <div class="field">
+                <label for="to">目的地地點（To）<span class="required">*</span></label>
+                <input
+                  id="to"
+                  name="目的地"
+                  type="text"
+                  placeholder="例：台北市 ○○ 區 □□ 路…"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="time">希望完成時間</label>
+                <input
+                  id="time"
+                  name="希望完成時間"
+                  type="datetime-local"
+                >
+              </div>
+              <div class="field">
+                <label for="budget">大約代墊金額 / 預算</label>
+                <input
+                  id="budget"
+                  name="預估金額"
+                  type="text"
+                  placeholder="例：代買約 500 元以內"
+                >
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="name">稱呼 Name<span class="required">*</span></label>
+                <input id="name" name="姓名" type="text" required>
+              </div>
+              <div class="field">
+                <label for="phone">手機 Mobile<span class="required">*</span></label>
+                <input id="phone" name="手機" type="tel" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="line">LINE ID</label>
+                <input id="line" name="LINE ID" type="text">
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="Email" type="email" placeholder="可選填，用於寄送任務摘要。">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="note">補充備註</label>
+              <textarea
+                id="note"
+                name="備註"
+                placeholder="其他想補充的內容（例如可以聯絡的時間、住家是否有管理室等）。"
+              ></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit">
+              送出任務需求
+            </button>
+            <div class="form-note">
+              送出後我會盡快回覆可行性與報價。送單不代表一定成立，雙方確認後才算正式排入行程。
+            </div>
+          </form>
+
+          <aside class="contact-side">
+            <h3>聯絡與服務範圍</h3>
+            <p>
+              目前以台北市／新北部分區域為主，實際可跑範圍會依當日行程與任務內容調整。
+              如有超出區域的需求，可以先私訊討論。
+            </p>
+            <ul class="contact-list">
+              <li>📍 主要服務：台北市（其他區域可議）</li>
+              <li>🕒 大致服務時段：依行程彈性安排，可於表單中註明偏好時間。</li>
+              <li>💬 優先聯絡方式：LINE / IG 私訊。</li>
+            </ul>
+            <p style="margin-top:8px;">
+              未來若有常態合作（店家跑腿、長期定期任務），也歡迎另外討論長期方案。
+            </p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      POW POW TASK · 跑跑腿萬事屋 ｜ We run so you don’t have to.
+    </footer>
+  </div>
+</body>
+</html>
