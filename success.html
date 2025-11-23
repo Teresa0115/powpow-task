@@ -1,151 +1,264 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <title>任務已送出｜Pow Pow Task</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>任務已送出｜跑腿服務</title>
   <style>
-    :root {
-      --pow-orange: #f97316;
-      --pow-orange-dark: #ea580c;
-      --pow-cream: #fff7e6;
-      --pow-bg: #faf5ef;
-      --pow-text: #1f2933;
-      --pow-muted: #6b7280;
-      --radius-lg: 18px;
-      --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
+    /* 全域設定 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        "Noto Sans TC", sans-serif;
-      background: radial-gradient(circle at top, #fff, var(--pow-bg));
-      color: var(--pow-text);
       min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      background: radial-gradient(circle at top, #fef9f3 0%, #f3f4ff 40%, #edf2ff 100%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "PingFang TC",
+        "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      color: #1f2933;
+    }
+
+    /* 卡片外框 */
+    .card {
+      width: 100%;
+      max-width: 520px;
+      background: #ffffffcc;
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 32px 28px 28px;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.12),
+        0 0 0 1px rgba(148, 163, 184, 0.12);
+      text-align: center;
+      animation: card-in 600ms ease-out forwards;
+      transform: translateY(10px);
+      opacity: 0;
+    }
+
+    /* 上方圖示圈圈 */
+    .icon-wrap {
+      width: 86px;
+      height: 86px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 0%, #fef9f3 0%, #22c55e 40%, #16a34a 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(22, 163, 74, 0.4);
+      animation: pulse 1.8s ease-out infinite;
     }
 
-    .card {
-      max-width: 440px;
-      width: 100%;
-      background: #fff;
-      border-radius: var(--radius-lg);
-      padding: 28px 24px 22px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(249, 115, 22, 0.18);
-      text-align: center;
+    .icon-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 0%, #ffffff80 0%, transparent 55%);
+      opacity: 0.9;
     }
 
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 52px;
-      height: 52px;
+    .checkmark {
+      position: relative;
+      width: 34px;
+      height: 24px;
+      border-radius: 4px;
+      border-bottom: 4px solid #ffffff;
+      border-left: 4px solid #ffffff;
+      transform: rotate(-45deg) translateY(-2px);
+      animation: check-in 400ms ease-out 200ms both;
+    }
+
+    .checkmark::after {
+      content: "";
+      position: absolute;
+      right: -6px;
+      top: -16px;
+      width: 4px;
+      height: 22px;
+      background: #ffffff;
       border-radius: 999px;
-      background: var(--pow-cream);
-      border: 2px solid var(--pow-orange);
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--pow-orange-dark);
-      line-height: 1.15;
-      margin-bottom: 12px;
     }
 
-    h1 {
-      font-size: 22px;
-      margin-bottom: 6px;
+    /* 文字區塊 */
+    .title {
+      font-size: 1.6rem;
+      letter-spacing: 0.12em;
+      margin-bottom: 8px;
+      font-weight: 700;
+      color: #111827;
     }
 
-    h1 span {
-      color: var(--pow-orange-dark);
-    }
-
-    p {
-      font-size: 14px;
-      color: var(--pow-muted);
-      margin-bottom: 10px;
+    .subtitle {
+      font-size: 1rem;
+      color: #4b5563;
+      margin-bottom: 18px;
+      line-height: 1.6;
     }
 
     .hint {
-      font-size: 12px;
-      color: var(--pow-muted);
-      margin-bottom: 20px;
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 26px;
+      line-height: 1.6;
     }
 
-    .btn-row {
+    .highlight {
+      font-weight: 600;
+      color: #16a34a;
+    }
+
+    /* 按鈕區 */
+    .actions {
       display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
     }
 
-    a.btn {
+    .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 9px 16px;
+      padding: 10px 20px;
       border-radius: 999px;
-      font-size: 14px;
-      font-weight: 600;
       text-decoration: none;
+      font-size: 0.98rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: transform 0.08s ease, box-shadow 0.08s ease,
-        background 0.08s ease, color 0.08s ease;
+      border: none;
+      transition: transform 140ms ease, box-shadow 140ms ease,
+        background-color 140ms ease, color 140ms ease;
+      min-width: 180px;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--pow-orange), var(--pow-orange-dark));
-      color: #fff;
-      box-shadow: 0 8px 18px rgba(234, 88, 12, 0.35);
+      background: linear-gradient(135deg, #16a34a, #22c55e);
+      color: #ffffff;
+      box-shadow: 0 12px 25px rgba(22, 163, 74, 0.4);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(234, 88, 12, 0.4);
+      box-shadow: 0 16px 32px rgba(22, 163, 74, 0.5);
     }
 
-    .btn-ghost {
+    .btn-outline {
       background: transparent;
-      color: var(--pow-orange-dark);
+      color: #16a34a;
+      border: 1px solid rgba(22, 163, 74, 0.28);
     }
 
-    .small {
-      font-size: 11px;
-      color: var(--pow-muted);
-      margin-top: 14px;
+    .btn-outline:hover {
+      background: rgba(22, 163, 74, 0.05);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .btn span {
+      margin-left: 6px;
+      font-size: 0.9rem;
+    }
+
+    /* 頁腳小字 */
+    .footer {
+      margin-top: 22px;
+      font-size: 0.78rem;
+      color: #9ca3af;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* RWD */
+    @media (max-width: 480px) {
+      .card {
+        padding: 26px 20px 22px;
+        border-radius: 20px;
+      }
+      .title {
+        font-size: 1.4rem;
+      }
+      .subtitle {
+        font-size: 0.95rem;
+      }
+      .hint {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* 動畫 */
+    @keyframes card-in {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 10px 30px rgba(22, 163, 74, 0.4);
+      }
+      60% {
+        transform: scale(1.06);
+        box-shadow: 0 14px 40px rgba(22, 163, 74, 0.55);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 10px 30px rgba(22, 163, 74, 0.4);
+      }
+    }
+
+    @keyframes check-in {
+      0% {
+        opacity: 0;
+        transform: scale(0.4) rotate(-45deg) translateY(-2px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) rotate(-45deg) translateY(-2px);
+      }
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="logo">
-      POW<br>POW
+  <main class="card" aria-label="送出成功資訊">
+    <div class="icon-wrap" aria-hidden="true">
+      <div class="checkmark"></div>
     </div>
-    <h1><span>已收到</span>你的任務！</h1>
-    <p>
-      Pow Pow Task 已成功收到這次的跑腿需求。<br>
-      我會依照你填寫的內容，儘快回覆「是否可接」與「預估金額／時間」。
-    </p>
+
+    <h1 class="title">任務已送出</h1>
+    <p class="subtitle">謝謝你的委託，我已收到這次的跑腿任務。</p>
     <p class="hint">
-      若是<strong>急件</strong>，建議同時透過 LINE 再提醒我一次，<br>
-      以免訊息塞車沒第一時間看到。
+      我會在 <span class="highlight">營業時間內</span> 盡快查看內容，並回覆你<br />
+      「是否可以接案、預估費用與完成時間」。
     </p>
 
-    <div class="btn-row">
-      <a href="https://teresa0115.github.io/powpow-task/" class="btn btn-primary">
-        返回 Pow Pow Task 首頁
+    <div class="actions">
+      <a class="btn btn-primary" href="https://teresa0115.github.io/powpow-task/">
+        回到跑腿首頁<span>↩</span>
+      </a>
+      <!-- 如果之後有 Line / IG，可以把連結填進來 -->
+      <a class="btn btn-outline" href="mailto:luck5858@gmail.com">
+        若有補充說明，寫信給我<span>✉</span>
       </a>
     </div>
 
-    <div class="small">
-      Pow Pow Task｜跑跑腿萬事屋 · We run so you don’t have to.
-    </div>
-  </div>
+    <p class="footer">
+      若你在 10 分鐘內沒有收到自動確認信，<br />
+      請檢查垃圾信件匣，或再填寫一次表單。
+    </p>
+  </main>
 </body>
 </html>
