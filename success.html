@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>任務已送出｜Pow Pow Task</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --pow-orange: #f97316;
+      --pow-orange-dark: #ea580c;
+      --pow-cream: #fff7e6;
+      --pow-bg: #faf5ef;
+      --pow-text: #1f2933;
+      --pow-muted: #6b7280;
+      --radius-lg: 18px;
+      --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Noto Sans TC", sans-serif;
+      background: radial-gradient(circle at top, #fff, var(--pow-bg));
+      color: var(--pow-text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    .card {
+      max-width: 440px;
+      width: 100%;
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 28px 24px 22px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(249, 115, 22, 0.18);
+      text-align: center;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      background: var(--pow-cream);
+      border: 2px solid var(--pow-orange);
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--pow-orange-dark);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    h1 span {
+      color: var(--pow-orange-dark);
+    }
+
+    p {
+      font-size: 14px;
+      color: var(--pow-muted);
+      margin-bottom: 10px;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--pow-muted);
+      margin-bottom: 20px;
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    a.btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.08s ease, box-shadow 0.08s ease,
+        background 0.08s ease, color 0.08s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pow-orange), var(--pow-orange-dark));
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(234, 88, 12, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(234, 88, 12, 0.4);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--pow-orange-dark);
+    }
+
+    .small {
+      font-size: 11px;
+      color: var(--pow-muted);
+      margin-top: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">
+      POW<br>POW
+    </div>
+    <h1><span>已收到</span>你的任務！</h1>
+    <p>
+      Pow Pow Task 已成功收到這次的跑腿需求。<br>
+      我會依照你填寫的內容，儘快回覆「是否可接」與「預估金額／時間」。
+    </p>
+    <p class="hint">
+      若是<strong>急件</strong>，建議同時透過 LINE 再提醒我一次，<br>
+      以免訊息塞車沒第一時間看到。
+    </p>
+
+    <div class="btn-row">
+      <a href="https://teresa0115.github.io/powpow-task/" class="btn btn-primary">
+        返回 Pow Pow Task 首頁
+      </a>
+    </div>
+
+    <div class="small">
+      Pow Pow Task｜跑跑腿萬事屋 · We run so you don’t have to.
+    </div>
+  </div>
+</body>
+</html>
